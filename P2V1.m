@@ -203,19 +203,21 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     
 end
 i =2;path(:,:,1) = CurrentNode;
-Number = ParentNodeNumber
+Number = ParentNodeNumber;
  while  ~isequal(CurrentNode,start_node)
     
 %      Node(:,:,N)=NewNode;
 %      NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
      P = NodeInfo(1,2,Number);
+     CurrentNode = Node(:,:,P);
      path(:,:,i) = Node(:,:,P);
      Number = NodeInfo(1,2,P);
-     
+     i = i+1;
  end
  
- 
- Pathx = path(1,1,:);
- Pathy = path(1,2,:);
- Plot(Pathx,Pathy);
+ for u = 1:i-1
+ Pathx(u) = path(1,1,u);
+ Pathy(u) = path(1,2,u);
+ end
+ plot(Pathx,Pathy);
  hold off
