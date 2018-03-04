@@ -1,3 +1,4 @@
+clear all;
 %% Define all the obstacles areawise
 %plot circle 
 xcentre=180;
@@ -84,7 +85,7 @@ CurrentNode = Node(:,:,ParentNodeNumber);
 while ~isequal(CurrentNode,target_node)
     
 NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
-
+ CurrentNode = Node(:,:,ParentNodeNumber);
 %%  For Right
 [NewNode,status] = moveright(CurrentNode);
     if (status == 1) 
@@ -202,23 +203,30 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
 %     drawnow
 %     plot(currentx,currenty,'*');
     ParentNodeNumber = ParentNodeNumber+1;
-    CurrentNode = Node(:,:,ParentNodeNumber);
-    
+   
     
     
 end
 %% Backtracking the nodes to plot the optimal path found
-i =2;path(:,:,1) = CurrentNode;
+i=2;path(:,:,1) = CurrentNode;
 Number = ParentNodeNumber;
+TrackInfo =[];
+TrackInfo(:,:,1)= [1,Number];
  while  ~isequal(CurrentNode,start_node)
     
 %      Node(:,:,N)=NewNode;
 %      NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
-     P = NodeInfo(1,2,Number);
-     CurrentNode = Node(:,:,P);
-     path(:,:,i) = Node(:,:,P);
-     Number = NodeInfo(1,2,P);
-     i = i+1;
+    
+
+%      P = NodeInfo(1,2,Number);
+%      CurrentNode = Node(:,:,P);
+%      path(:,:,i) = Node(:,:,P);
+%      Node(:,:,Number)
+%      TrackInfo(:,:,i)= [Number,P];
+%      Number = NodeInfo(1,2,P);
+%      i = i+1;
+%      Node(:,:,Number)
+
  end
  %% plot the optimal path
  for u = 1:i-1
