@@ -73,6 +73,7 @@ plot(target_node(1),target_node(2),'--gs',...
 %% Intializing nodes
 Node = [];%saves unique nodes, visited nodes 
 NodeInfo = [];% NodeInfor = [N,ParentNodeNumber,costtocome];
+NodeInfo(:,:,1)=[1,1,0];
 CurrentNode= start_node;
 Node(:,:,1) = CurrentNode; 
 CurrentNodenumber=size(CurrentNode,3);
@@ -84,14 +85,14 @@ CurrentNode = Node(:,:,ParentNodeNumber);
 %% Creating Nodes for all points until target is reached
 while ~isequal(CurrentNode,target_node)
     
-NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+% NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
  CurrentNode = Node(:,:,ParentNodeNumber);
 %%  For Right
+
 [NewNode,status] = moveright(CurrentNode);
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -105,7 +106,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -119,7 +119,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -133,7 +132,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -147,7 +145,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -160,8 +157,7 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
 [NewNode,status] = movedownleft(CurrentNode);
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
-            if ~(inside_obstacle || onobstacle_boundary)
-                
+            if ~(inside_obstacle || onobstacle_boundary) 
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -175,7 +171,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -189,7 +184,6 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
                     Node(:,:,N)=NewNode;
@@ -198,34 +192,28 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
             end
     end
     
-%     currentx = Node(1,1,ParentNodeNumber);
-%     currenty = Node(1,2,ParentNodeNumber);
-%     drawnow
-%     plot(currentx,currenty,'*');
     ParentNodeNumber = ParentNodeNumber+1;
    
     
     
 end
 %% Backtracking the nodes to plot the optimal path found
+ParentNodeNumber = ParentNodeNumber - 1;
 i=2;path(:,:,1) = CurrentNode;
 Number = ParentNodeNumber;
 TrackInfo =[];
 TrackInfo(:,:,1)= [1,Number];
  while  ~isequal(CurrentNode,start_node)
     
-%      Node(:,:,N)=NewNode;
-%      NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     
-
-%      P = NodeInfo(1,2,Number);
-%      CurrentNode = Node(:,:,P);
-%      path(:,:,i) = Node(:,:,P);
-%      Node(:,:,Number)
-%      TrackInfo(:,:,i)= [Number,P];
-%      Number = NodeInfo(1,2,P);
-%      i = i+1;
-%      Node(:,:,Number)
+     P = NodeInfo(1,2,Number);
+     CurrentNode = Node(:,:,P);
+     path(:,:,i) = Node(:,:,P);
+     Node(:,:,Number);
+     TrackInfo(:,:,i)= [Number,P];
+     Number = NodeInfo(1,2,P);
+     i = i+1;
+     Node(:,:,Number);
 
  end
  %% plot the optimal path
