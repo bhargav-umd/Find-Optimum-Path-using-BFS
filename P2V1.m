@@ -29,24 +29,14 @@ plot(xp3,yp3);
 alpha(0.3);
 % hold off
 
-%% Define Goal and Target points 
+%% Get Start and Target points 
 
 % start_node = [xg,yg];
 % target_node = [xt,yt];
-start_node =[54,68];
-drawnow
-plot(start_node(1),start_node(2),'--gs',...
-    'LineWidth',2,...
-    'MarkerSize',20,...
-    'MarkerEdgeColor','b');
-target_node =[106,120];
-drawnow
-plot(target_node(1),target_node(2),'--gs',...
-    'LineWidth',2,...
-    'MarkerSize',20,...
-    'MarkerEdgeColor','g' );
-%% Check if points are inside obstacles 
+[start_node,target_node] = Takeinput_fromuser();
+% start_node =[54,68];
 
+%% %% Check if user input points are inside obstacles or in workspace
 [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(start_node);
 if inside_obstacle || onobstacle_boundary
      say = 'Starting point is not in Free workspace';
@@ -63,8 +53,23 @@ if inside_obstacle || onobstacle_boundary
      
 end
 
-%% Intializing nodes
+drawnow
+plot(start_node(1),start_node(2),'*');
+plot(start_node(1),start_node(2),'--gs',...
+    'LineWidth',2,...
+    'MarkerSize',10,...
+    'MarkerEdgeColor','b');
 
+% target_node =[106,120];
+drawnow
+plot(target_node(1),target_node(2),'*');
+plot(target_node(1),target_node(2),'--gs',...
+    'LineWidth',2,...
+    'MarkerSize',10,...
+    'MarkerEdgeColor','g' );
+
+
+%% Intializing nodes
 Node = [];%saves unique nodes, visited nodes 
 NodeInfo = [];% NodeInfor = [N,ParentNodeNumber,costtocome];
 CurrentNode= start_node;
@@ -75,12 +80,12 @@ costtocome= 0;
 N = 1; % Number of visited Nodes
 CurrentNode = Node(:,:,ParentNodeNumber);
 
-%% Functions for moving in 8 directions and adding unvisited nodes to Node
+%% Creating Nodes for all points until target is reached
 while ~isequal(CurrentNode,target_node)
     
 NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
 
-%% For Right
+%%  For Right
 [NewNode,status] = moveright(CurrentNode);
     if (status == 1) 
         [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
@@ -202,6 +207,7 @@ NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
     
     
 end
+%% Backtracking the nodes to plot the optimal path found
 i =2;path(:,:,1) = CurrentNode;
 Number = ParentNodeNumber;
  while  ~isequal(CurrentNode,start_node)
@@ -214,10 +220,14 @@ Number = ParentNodeNumber;
      Number = NodeInfo(1,2,P);
      i = i+1;
  end
- 
+ %% plot the optimal path
  for u = 1:i-1
  Pathx(u) = path(1,1,u);
  Pathy(u) = path(1,2,u);
  end
- plot(Pathx,Pathy);
+ 
+ plot(Pathx,Pathy,'linewidth',2);
  hold off
+ 
+ 
+ 
