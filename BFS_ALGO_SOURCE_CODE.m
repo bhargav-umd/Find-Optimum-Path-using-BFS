@@ -82,7 +82,7 @@ costtocome= 0;
 N = 1; % Number of visited Nodes
 CurrentNode = Node(:,:,ParentNodeNumber);
 
-%% Creating Nodes for all points until target is reached
+%% USE BFS for Creating Nodes for all points until target is reached 
 while ~isequal(CurrentNode,target_node)
     
 % NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
