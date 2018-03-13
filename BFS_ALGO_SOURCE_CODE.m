@@ -223,6 +223,7 @@ TrackInfo(:,:,1)= [1,Number];
  Pathy(u) = path(1,2,u);
  end
  
+ drawnow
  plot(Pathx,Pathy,'linewidth',2);
  hold off
  toc
