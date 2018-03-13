@@ -5,7 +5,7 @@ x = CurrentNode(1,1);
 y = CurrentNode(1,2);
 
 node = [x,y];
-[inside_obstacle, ~,onobstacle_boundary] = obstacle_check(node);
+[inside_obstacle,onobstacle_boundary] = obstacle_check(node);
 
 if inside_obstacle || onobstacle_boundary || (y == 0) 
     NewNode = CurrentNode ;

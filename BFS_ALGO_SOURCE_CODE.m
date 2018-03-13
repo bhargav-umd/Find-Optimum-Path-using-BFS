@@ -1,9 +1,10 @@
+tic 
 clear all;
 %% Define all the obstacles areawise
 %plot circle 
 xcentre=180;
 ycentre = 120;
-t = 0:0.01:2*pi;
+t = 0:0.01:2*pi;        
 x = 15*cos(t)+ xcentre;
 y = 15*sin(t) + ycentre;
 drawnow
@@ -38,14 +39,14 @@ alpha(0.3);
 % start_node =[54,68];
 
 %% %% Check if user input points are inside obstacles or in workspace
-[inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(start_node);
+[inside_obstacle, onobstacle_boundary] = obstacle_check(start_node);
 if inside_obstacle || onobstacle_boundary
      say = 'Starting point is not in Free workspace';
      disp(say)
      return
 end
 
-[inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(target_node);
+[inside_obstacle,onobstacle_boundary] = obstacle_check(target_node);
 if inside_obstacle || onobstacle_boundary
     
      say = 'Target point is not in workspace, cannot be reached' ;
@@ -91,7 +92,7 @@ while ~isequal(CurrentNode,target_node)
 
 [NewNode,status] = moveright(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -104,7 +105,7 @@ while ~isequal(CurrentNode,target_node)
     %% For Up Right
 [NewNode,status] = moveupright(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -117,7 +118,7 @@ while ~isequal(CurrentNode,target_node)
         %% For Up
 [NewNode,status] = moveup(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -130,7 +131,7 @@ while ~isequal(CurrentNode,target_node)
          %% For Up Left
 [NewNode,status] = moveupleft(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -143,7 +144,7 @@ while ~isequal(CurrentNode,target_node)
  %% For left
 [NewNode,status] = moveleft(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -156,7 +157,7 @@ while ~isequal(CurrentNode,target_node)
      %% For Down Left 
 [NewNode,status] = movedownleft(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary) 
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -169,7 +170,7 @@ while ~isequal(CurrentNode,target_node)
      %% For down
 [NewNode,status] = movedown(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -182,7 +183,7 @@ while ~isequal(CurrentNode,target_node)
      %% For DownRight
 [NewNode,status] = movedownright(CurrentNode);
     if (status == 1) 
-        [inside_obstacle, onworkspace_boundry,onobstacle_boundary] = obstacle_check(NewNode);
+        [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
                 if ~(any(all(bsxfun(@eq,Node,NewNode))))
                     N=N+1; 
@@ -224,6 +225,6 @@ TrackInfo(:,:,1)= [1,Number];
  
  plot(Pathx,Pathy,'linewidth',2);
  hold off
- 
+ toc
  
  
