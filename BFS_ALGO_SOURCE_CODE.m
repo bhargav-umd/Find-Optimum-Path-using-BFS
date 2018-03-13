@@ -72,32 +72,32 @@ plot(target_node(1),target_node(2),'--gs',...
 
 
 %% Intializing nodes
-Node = [];%saves unique nodes, visited nodes 
-NodeInfo = [];% NodeInfor = [N,ParentNodeNumber,costtocome];
-NodeInfo(:,:,1)=[1,1,0];
+NodesSet = [];%saves unique nodes, visited nodes 
+NodesInfoSet = [];% NodeInfor = [N,ParentNodeNumber,costtocome];
+NodesInfoSet(:,:,1)=[1,1,0];
 CurrentNode= start_node;
-Node(:,:,1) = CurrentNode; 
+NodesSet(:,:,1) = CurrentNode; 
 CurrentNodenumber=size(CurrentNode,3);
 ParentNodeNumber =1 ;
 costtocome= 0;
 N = 1; % Number of visited Nodes
-CurrentNode = Node(:,:,ParentNodeNumber);
+CurrentNode = NodesSet(:,:,ParentNodeNumber);
 
 %% USE BFS for Creating Nodes for all points until target is reached 
 while ~isequal(CurrentNode,target_node)
     
 % NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
- CurrentNode = Node(:,:,ParentNodeNumber);
+ CurrentNode = NodesSet(:,:,ParentNodeNumber);
 %%  For Right
 
 [NewNode,status] = moveright(CurrentNode);
     if (status == 1) 
         [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -107,10 +107,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -120,10 +120,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -133,10 +133,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -146,10 +146,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -159,10 +159,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary) 
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -172,10 +172,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle,onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -185,10 +185,10 @@ while ~isequal(CurrentNode,target_node)
     if (status == 1) 
         [inside_obstacle, onobstacle_boundary] = obstacle_check(NewNode);
             if ~(inside_obstacle || onobstacle_boundary)
-                if ~(any(all(bsxfun(@eq,Node,NewNode))))
+                if ~(any(all(bsxfun(@eq,NodesSet,NewNode))))
                     N=N+1; 
-                    Node(:,:,N)=NewNode;
-                    NodeInfo(:,:,N) = [N,ParentNodeNumber,costtocome];
+                    NodesSet(:,:,N)=NewNode;
+                    NodesInfoSet(:,:,N) = [N,ParentNodeNumber,costtocome];
                 end
             end
     end
@@ -207,14 +207,14 @@ TrackInfo(:,:,1)= [1,Number];
  while  ~isequal(CurrentNode,start_node)
     
     
-     P = NodeInfo(1,2,Number);
-     CurrentNode = Node(:,:,P);
-     path(:,:,i) = Node(:,:,P);
-     Node(:,:,Number);
+     P = NodesInfoSet(1,2,Number);
+     CurrentNode = NodesSet(:,:,P);
+     path(:,:,i) = NodesSet(:,:,P);
+     NodesSet(:,:,Number);
      TrackInfo(:,:,i)= [Number,P];
-     Number = NodeInfo(1,2,P);
+     Number = NodesInfoSet(1,2,P);
      i = i+1;
-     Node(:,:,Number);
+     NodesSet(:,:,Number);
 
  end
  %% plot the optimal path
